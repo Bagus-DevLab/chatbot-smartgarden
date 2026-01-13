@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  chatbot_api:
+    build: .
+    container_name: python_chatbot_container
+    ports:
+      - "8000:8000"
+    volumes:
+      # Opsional: Agar kalau edit codingan di lokal, di container ikut berubah (Hot Reload)
+      - .:/app
+    env_file:
+      - .env
+    environment:
+      # Pastikan variabel ini terbaca
+      - GOOGLE_APPLICATION_CREDENTIALS=serviceAccountKey.json
+    restart: always

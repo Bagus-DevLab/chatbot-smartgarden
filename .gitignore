@@ -1,0 +1,31 @@
+# --- Security (Wajib) ---
+.env
+serviceAccountKey.json
+*.pem
+*.key
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+
+# --- Virtual Environments ---
+venv/
+.venv/
+env/
+.env/
+
+# --- IDE Settings (VS Code / PyCharm) ---
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# --- OS Files (Mac/Windows) ---
+.DS_Store
+Thumbs.db
+
+# --- Docker ---
+# Kita tidak perlu ignore Dockerfile atau docker-compose.yml (itu aman)
+# Tapi jika ada file log container:
+*.log
