@@ -5,7 +5,7 @@ services:
     build: .
     container_name: python_chatbot_container
     ports:
-      - "8000:8000"
+      - "8005:8000"
     volumes:
       # Opsional: Agar kalau edit codingan di lokal, di container ikut berubah (Hot Reload)
       - .:/app

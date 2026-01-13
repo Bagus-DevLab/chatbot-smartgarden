@@ -1,0 +1,40 @@
+name: Deploy to VPS
+
+# Robot bekerja setiap ada push ke branch main
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    name: Deploy to VPS
+    runs-on: ubuntu-latest
+    
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v2
+
+    - name: Deploy via SSH
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.VPS_HOST }}
+        username: ${{ secrets.VPS_USER }}
+        key: ${{ secrets.VPS_SSH_KEY }}
+        port: 22
+        script: |
+          # 1. Masuk ke folder project (Sesuai log kamu tadi)
+          cd /home/ubuntu/chatbot-smartgarden
+
+          # 2. Reset perubahan lokal di VPS (biar git pull lancar)
+          git checkout .
+
+          # 3. Tarik kodingan terbaru dari GitHub
+          git pull origin main
+
+          # 4. Build ulang dan Restart Container
+          # -d = detach (background), --build = paksa build ulang image
+          docker-compose up -d --build
+
+          # 5. Bersihkan image sampah (opsional, biar hemat disk)
+          docker image prune -f
