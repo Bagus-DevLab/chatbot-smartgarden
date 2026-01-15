@@ -33,7 +33,7 @@ class ChatRequest(BaseModel):
     message: str
 
 # --- 2. FUNGSI CEK LIMIT (KUOTA) ---
-def check_limit_and_update(uid: str, max_limit: int = 5):
+def check_limit_and_update(uid: str, max_limit: int = 10):
     # Set zona waktu Indonesia (WIB) agar reset jam 00:00 WIB
     tz = pytz.timezone('Asia/Jakarta')
     today_str = datetime.now(tz).strftime("%Y-%m-%d") # Contoh: "2023-10-27"
